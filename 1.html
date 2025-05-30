@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Handles - Long Life</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f9f7f4;
+      color: #333;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background-color: #f9f7f4;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-section img {
+      height: 90px;
+      width: 160px;
+      object-fit: contain;
+    }
+    .tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: -5px;
+      color: #555;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .nav-item {
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      padding: 5px 0;
+      transition: color 0.2s ease;
+    }
+    .nav-item:hover,
+    .nav-item.active {
+      text-decoration: underline;
+      color: black;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+      .logo-section {
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+      .nav-item {
+        font-size: 16px;
+      }
+    }
+    .container {
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .product {
+      position: relative;
+      width: calc(33.333% - 20px);
+      background-color: #fff0e6;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgba(220, 20, 60, 0.85);
+      color: white;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-bottom-left-radius: 8px;
+      font-size: 0.9em;
+    }
+    .product h2 {
+      font-size: 1.2em;
+      margin: 15px;
+      color: #333;
+    }
+    #productModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+    }
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #333;
+    }
+    .modal-content label {
+      display: block;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #444;
+      text-align: left;
+    }
+    .modal-content select {
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .sizes-info {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      text-align: left;
+    }
+    @media (max-width: 600px) {
+  .products {
+    gap: 15px;
+  }
+  .product {
+    width: 100% !important; /* Full width on small screens */
+    max-width: 400px;        /* Optional max width for large phones */
+    margin: 0 auto;          /* Center horizontally */
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .product {
+    width: calc(50% - 15px); /* 2 per row on tablets */
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo-section">
+    <img src="images/logo.png" alt="Long Life Logo" />
+    <div class="tagline">BY JAY AMBE</div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-item">HOME</a>
+    <a href="handles.html" class="nav-item active">HANDLES</a>
+    <a href="door-knobs.html" class="nav-item">DOOR KNOBS</a>
+    <a href="bathroom-accessories.html" class="nav-item">BATHROOM ACCESSORIES</a>
+    <a href="contact.html" class="nav-item">CONTACT</a>
+  </div>
+</nav>
+
+<main class="container">
+  <h1>Premium Profile Handles</h1><br><br>
+  <section class="products">
+    <!-- Product 1 -->
+    <article class="product" data-name="L-3 Handles" data-images='{
+      "Black": { "8": "images/blackL3-1.jpg" },
+      "Grey": { "8": "images/greyL3-1.jpg" },
+      "Rose Gold": { "8": "images/roseL3-1.jpg" }
+    }'>
+      <img src="images/1.jpg" alt="MODERN MATTE BLACK HANDLE L-3" />
+      <div class="overlay">Ready Stock</div>
+      <h2>L-3</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 2 -->
+    <article class="product" data-name="L-5 Handles" data-images='{
+      "Black": { "8": "images/blackL5-1.jpg" },
+      "Grey": { "8": "images/greyL5-1.jpg" },
+      "Rose Gold": { "8": "images/roseL5-1.jpg" }
+    }'>
+      <img src="images/2.jpg" alt="CLASSIC GOLD HANDLE G-7" />
+      <div class="overlay">Trending</div>
+      <h2>L-5</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 3 -->
+    <article class="product" data-name="L-10 Handles" data-images='{
+      "Black": { "8": "images/blackL10-1.jpg" },
+      "Rose Gold": { "8": "images/roseL10-1.jpg" }
+    }'>
+      <img src="images/3.jpg" alt="SATIN SILVER HANDLE S-5" />
+      <div class="overlay">Trending</div>
+      <h2>L-10</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 4 -->
+    <article class="product" data-name="Diamond - china black" data-images='{
+      "China Black": { "8": "images/blackL-1.jpg" }
+    }'>
+      <img src="images/blackL-1.jpg" alt="CLASSIC ROSE GOLD HANDLE R-1" />
+      <div class="overlay">Ready Stock</div>
+      <h2>Diamond - China Black</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 5 -->
+    <article class="product" data-name="L-13 China Black Handles" data-images='{
+      "China Black": { "8": "images/blackL13-1.jpg" }
+    }'>
+      <img src="images/blackL13-1.jpg" alt="MATTE BLACK HANDLE M-9" />
+      <div class="overlay">Ready Stock</div>
+      <h2>L-13 China Black</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <article class="product" data-name="LL-29 Handles" data-images='{
+      "Black": { "8": "images/black-1.jpg" },
+      "Grey": { "8": "images/grey-1.jpg" },
+      "Rose Gold": { "8": "images/rose-1.jpg" }
+    }'>
+      <img src="images/4.jpg" alt="MATTE BLACK HANDLE M-9" />
+      <div class="overlay">New Arrival</div>
+      <h2>LL-29</h2>
+      <h3>Click To View Details</h3>
+    </article>
+  </section>
+</main>
+
+<div id="productModal" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="modal-content">
+    <button class="close-btn" aria-label="Close modal">&times;</button>
+    <h2 id="modalTitle"></h2>
+    <img id="modalImage" src="" alt="" />
+    <label for="colorSelect">Select Color:</label>
+    <select id="colorSelect"></select>
+    <div class="sizes-info">
+      <strong>Available Sizes:</strong> 8", 10", 12", 14", 16", 18", 20", 22", 24", 26", 28", 30", 32", 34", 36"
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const modal = document.getElementById('productModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    const colorSelect = document.getElementById('colorSelect');
+    const closeBtn = modal.querySelector('.close-btn');
+    let currentImages = {};
+
+    function openModal(product) {
+      modalTitle.textContent = product.dataset.name;
+      currentImages = JSON.parse(product.dataset.images);
+      
+      // Clear existing color options
+      colorSelect.innerHTML = '';
+
+      // Add color options dynamically
+      Object.keys(currentImages).forEach(color => {
+        const option = document.createElement('option');
+        option.value = color;
+        option.textContent = color;
+        colorSelect.appendChild(option);
+      });
+
+      // Select the first color by default
+      colorSelect.value = Object.keys(currentImages)[0];
+      updateImage();
+      modal.style.display = 'flex';
+      modal.focus();
+    }
+
+    function updateImage() {
+      const color = colorSelect.value;
+      if (currentImages[color]) {
+        const sizes = Object.keys(currentImages[color]);
+        const defaultSize = sizes[0];
+        modalImage.src = currentImages[color][defaultSize];
+        modalImage.alt = `${modalTitle.textContent} - ${color}`;
+      }
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    document.querySelectorAll('.product').forEach(product => {
+      product.addEventListener('click', () => openModal(product));
+      product.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(product);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+    colorSelect.addEventListener('change', updateImage);
+  })();
+</script>
+
+</body>
+</html>

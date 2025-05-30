@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bathroom accessories - Long Life</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f9f7f4;
+      color: #333;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background-color: #f9f7f4;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-section img {
+      height: 90px;
+      width: 160px;
+      object-fit: contain;
+    }
+    .tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: -5px;
+      color: #555;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .nav-item {
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      padding: 5px 0;
+      transition: color 0.2s ease;
+    }
+    .nav-item:hover,
+    .nav-item.active {
+      text-decoration: underline;
+      color: black;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+      .logo-section {
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+      .nav-item {
+        font-size: 16px;
+      }
+    }
+    .container {
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .product {
+      position: relative;
+      width: calc(33.333% - 20px);
+      background-color: #fff0e6;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    .product img {
+      width: 100%;
+      height: 230px;
+      display: block;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgba(220, 20, 60, 0.85);
+      color: white;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-bottom-left-radius: 8px;
+      font-size: 0.9em;
+    }
+    .product h2 {
+      font-size: 1.2em;
+      margin: 15px;
+      color: #333;
+    }
+    #productModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+    }
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #333;
+    }
+    .modal-content label {
+      display: block;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #444;
+      text-align: left;
+    }
+    .modal-content select {
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .sizes-info {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      text-align: left;
+    }
+    @media (max-width: 600px) {
+  .products {
+    gap: 15px;
+  }
+  .product {
+    width: 100% !important; /* Full width on small screens */
+    max-width: 400px;        /* Optional max width for large phones */
+    margin: 0 auto;          /* Center horizontally */
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .product {
+    width: calc(50% - 15px); /* 2 per row on tablets */
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo-section">
+    <img src="images/logo.png" alt="Long Life Logo" />
+    <div class="tagline">BY JAY AMBE</div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-item">HOME</a>
+    <a href="handles.html" class="nav-item ">HANDLES</a>
+    <a href="door-knobs.html" class="nav-item">DOOR KNOBS</a>
+    <a href="bathroom-accessories.html" class="nav-item active">BATHROOM ACCESSORIES</a>
+    <a href="contact.html" class="nav-item">CONTACT</a>
+  </div>
+</nav>
+
+<main class="container">
+  <h1>Premium Bathroom Accessories (Ultra)</h1><br><br>
+  <section class="products">
+    <!-- Product 1 -->
+    <article class="product" data-name="Towel Rack" data-images='{
+      "Chrome": { "8": "images/Ultra/tr.jpg" },
+      "Black": { "8": "images/Ultra/tr2.jpg" },
+      "Gold": { "8": "images/Ultra/tr3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/tr4.jpg" }
+    }'>
+      <img src="images/Ultra/tr.jpg" alt="MODERN MATTE BLACK HANDLE L-3" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Towel Rack 24" 18"</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 2 -->
+    <article class="product" data-name="Towel Road" data-images='{
+      "Chrome": { "8": "images/Ultra/r.jpg" },
+      "Black": { "8": "images/Ultra/r2.jpg" },
+      "Gold": { "8": "images/Ultra/r3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/r4.jpg" }
+    }'>
+      <img src="images/Ultra/r.jpg" alt="CLASSIC GOLD HANDLE G-7" />
+      <div class="overlay">LIMITED STOCK</div>
+      <h2>Towel Road 24" 18"</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 3 -->
+    <article class="product" data-name="Napkin Ring" data-images='{
+      "Chrome": { "8": "images/Ultra/n.jpg" },
+      "Black": { "8": "images/Ultra/n2.jpg" },
+      "Gold": { "8": "images/Ultra/n3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/n4.jpg" }
+    }'>
+      <img src="images/ultra/n.jpg" alt="Napkin Ring" />
+      <div class="overlay">NEW ARRIVAL</div>
+      <h2>Napkin Ring</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 4 -->
+    <article class="product" data-name="Soap Dish Single" data-images='{
+     "Chrome": { "8": "images/Ultra/s.jpg" },
+      "Black": { "8": "images/Ultra/s2.jpg" },
+      "Gold": { "8": "images/Ultra/s3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/s4.jpg" }
+    }'>
+      <img src="images/ultra/s.jpg" alt="Soap Dish Single" />
+      <div class="overlay">LIMITED STOCK</div>
+      <h2>Soap Dish Single</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 5 -->
+    <article class="product" data-name="Tumbler Holder" data-images='{
+     "Chrome": { "8": "images/Ultra/t.jpg" },
+      "Black": { "8": "images/Ultra/t2.jpg" },
+      "Gold": { "8": "images/Ultra/t3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/t4.jpg" }
+    }'>
+      <img src="images/ultra/t.jpg" alt="Tumbler Holder" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Tumbler Holder</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 6 -->
+    <article class="product" data-name="Dispenser Holder" data-images='{
+      "Chrome": { "8": "images/Ultra/d.jpg" },
+      "Black": { "8": "images/Ultra/d2.jpg" },
+      "Gold": { "8": "images/Ultra/d3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/d4.jpg" }
+    }'>
+      <img src="images/ultra/d.jpg" alt="Dispenser Holder" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Dispenser Holder</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 7 -->
+    <article class="product" data-name="Paper Holder" data-images='{
+      "Chrome": { "8": "images/Ultra/p.jpg" },
+      "Black": { "8": "images/Ultra/p2.jpg" },
+      "Gold": { "8": "images/Ultra/p3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/p4.jpg" }
+    }'>
+      <img src="images/Ultra/p.jpg" alt="Paper Holder" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Paper Holder</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 8 -->
+    <article class="product" data-name="Double Soap Dish" data-images='{
+      "Chrome": { "8": "images/Ultra/ds.jpg" },
+      "Black": { "8": "images/Ultra/ds2.jpg" },
+      "Gold": { "8": "images/Ultra/ds3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/ds4.jpg" }
+    }'>
+      <img src="images/Ultra/ds.jpg" alt="Double Soap Dish" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Double Soap Dish</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 9 -->
+    <article class="product" data-name="Soap Dish + Tumbler" data-images='{
+      "Chrome": { "8": "images/Ultra/sd.jpg" },
+      "Black": { "8": "images/Ultra/sd2.jpg" },
+      "Gold": { "8": "images/Ultra/sd3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/sd4.jpg" }
+    }'>
+      <img src="images/Ultra/sd.jpg" alt="Soap Dish + Tumbler" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Soap Dish + Tumbler</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 10 -->
+    <article class="product" data-name="Robe Hook" data-images='{
+      "Chrome": { "8": "images/Ultra/rh.jpg" },
+      "Black": { "8": "images/Ultra/rh2.jpg" },
+      "Gold": { "8": "images/Ultra/rh3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/rh4.jpg" }
+    }'>
+      <img src="images/Ultra/rh.jpg" alt="Robe Hook" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Robe Hook</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    <!-- Product 11 -->
+    <article class="product" data-name="Grab Bar" data-images='{
+      "Chrome": { "8": "images/Ultra/g.jpg" },
+      "Black": { "8": "images/Ultra/g2.jpg" },
+      "Gold": { "8": "images/Ultra/g3.jpg" },
+      "Rose Gold": { "8": "images/Ultra/g4.jpg" }
+    }'>
+      <img src="images/Ultra/g.jpg" alt="Grab Bar" />
+      <div class="overlay">READY STOCK</div>
+      <h2>Grab Bar</h2>
+      <h3>Click To View Details</h3>
+    </article>
+
+    
+  </section>
+</main>
+
+<div id="productModal" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="modal-content">
+    <button class="close-btn" aria-label="Close modal">&times;</button>
+    <h2 id="modalTitle"></h2>
+    <img id="modalImage" src="" alt="" />
+    <label for="colorSelect">Select Color:</label>
+    <select id="colorSelect"></select>
+    <div class="sizes-info">
+      <strong>Change Color To View Different Photo</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const modal = document.getElementById('productModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    const colorSelect = document.getElementById('colorSelect');
+    const closeBtn = modal.querySelector('.close-btn');
+    let currentImages = {};
+
+    function openModal(product) {
+      modalTitle.textContent = product.dataset.name;
+      currentImages = JSON.parse(product.dataset.images);
+      
+      // Clear existing color options
+      colorSelect.innerHTML = '';
+
+      // Add color options dynamically
+      Object.keys(currentImages).forEach(color => {
+        const option = document.createElement('option');
+        option.value = color;
+        option.textContent = color;
+        colorSelect.appendChild(option);
+      });
+
+      // Select the first color by default
+      colorSelect.value = Object.keys(currentImages)[0];
+      updateImage();
+      modal.style.display = 'flex';
+      modal.focus();
+    }
+
+    function updateImage() {
+      const color = colorSelect.value;
+      if (currentImages[color]) {
+        const sizes = Object.keys(currentImages[color]);
+        const defaultSize = sizes[0];
+        modalImage.src = currentImages[color][defaultSize];
+        modalImage.alt = `${modalTitle.textContent} - ${color}`;
+      }
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    document.querySelectorAll('.product').forEach(product => {
+      product.addEventListener('click', () => openModal(product));
+      product.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(product);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+    colorSelect.addEventListener('change', updateImage);
+  })();
+</script>
+
+</body>
+</html>

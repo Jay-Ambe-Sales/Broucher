@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knobs - Long Life</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f9f7f4;
+      color: #333;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background-color: #f9f7f4;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-section img {
+      height: 90px;
+      width: 160px;
+      object-fit: contain;
+    }
+    .tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: -5px;
+      color: #555;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .nav-item {
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+      padding: 5px 0;
+      transition: color 0.2s ease;
+    }
+    .nav-item:hover,
+    .nav-item.active {
+      text-decoration: underline;
+      color: black;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+      .logo-section {
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+      .nav-item {
+        font-size: 16px;
+      }
+    }
+    .container {
+      text-align: center;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .product {
+      position: relative;
+      width: calc(33.333% - 20px);
+      background-color: #fff0e6;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: rgba(220, 20, 60, 0.85);
+      color: white;
+      font-weight: bold;
+      padding: 6px 10px;
+      border-bottom-left-radius: 8px;
+      font-size: 0.9em;
+    }
+    .product h2 {
+      font-size: 1.2em;
+      margin: 15px;
+      color: #333;
+    }
+    #productModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    .modal-content img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #333;
+    }
+    .modal-content label {
+      display: block;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #444;
+      text-align: left;
+    }
+    .modal-content select {
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .sizes-info {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      text-align: left;
+    }
+    #prevImgBtn, #nextImgBtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 32px;
+      font-weight: bold;
+      color: #444;
+      background: rgba(255,255,255,0.8);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+      padding: 0;
+    }
+    #prevImgBtn:hover, #nextImgBtn:hover {
+      background: rgba(255,255,255,1);
+      color: #000;
+    }
+    #prevImgBtn {
+      left: 10px;
+    }
+    #nextImgBtn {
+      right: 10px;
+    }
+    .modal-image-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto 15px;
+    }
+    @media (max-width: 600px) {
+  .products {
+    gap: 15px;
+  }
+  .product {
+    width: 100% !important;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .product {
+    width: calc(50% - 15px); /* 2 per row on tablets */
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo-section">
+    <img src="images/logo.png" alt="Long Life Logo" />
+    <div class="tagline">BY JAY AMBE</div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-item">HOME</a>
+    <a href="handles.html" class="nav-item ">HANDLES</a>
+    <a href="door-knobs.html" class="nav-item active">DOOR KNOBS</a>
+    <a href="bathroom-accessories.html" class="nav-item">BATHROOM ACCESSORIES</a>
+    <a href="contact.html" class="nav-item">CONTACT</a>
+  </div>
+</nav>
+
+<main class="container">
+  <h1>Premium Knobs</h1><br><br>
+  <section class="products">
+    <!-- Product 1 -->
+    <article class="product" data-name="NOB LN-1" data-images='{
+      "Blasting Black": ["images/blackLN.jpg", "images/blackLN-1.jpg"],
+      "PVD Gold": ["images/goldLN.jpg", "images/goldLN-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN.jpg", "images/roseLN-1.jpg"]
+    }'>
+      <img src="images/blackLN.jpg" alt="NOB LN-1" />
+      <div class="overlay">READY STOCK</div>
+      <h2>NOB LN-1</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 2 -->
+    <article class="product" data-name="NOB LN-4" data-images='{
+      "PVD Gold": ["images/goldLN2-1.jpg", "images/goldLN2.jpg"],
+      "PVD Rose Gold": ["images/roseLN2.jpg", "images/roseLN2-1.jpg"]
+    }'>
+      <img src="images/goldLN2-1.jpg" alt="NOB LN-4" />
+      <div class="overlay">LIMITED STOCK</div>
+      <h2>NOB LN-4</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 3 -->
+    <article class="product" data-name="NOB LN-5" data-images='{
+      "China Black": ["images/blackLN5.jpg", "images/blackLN5-1.jpg"],
+      "PVD Gold": ["images/goldLN5.jpg", "images/goldLN5-1.jpg"]
+    }'>
+      <img src="images/blackLN5.jpg" alt="NOB LN-5" />
+      <div class="overlay">NEW ARRIVAL</div>
+      <h2>NOB LN-5</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 4 -->
+    <article class="product" data-name="NOB LN-6" data-images='{
+      "Blasting Black": ["images/blackLN6.jpg", "images/blackLN6-1.jpg"],
+      "PVD Gold": ["images/goldLN6.jpg", "images/goldLN6-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN6.jpg", "images/roseLN6-1.jpg"]
+    }'>
+      <img src="images/blackLN6.jpg" alt="NOB LN-6" />
+      <div class="overlay">LIMITED STOCK</div>
+      <h2>NOB LN-6</h2>
+      <h3>Click here To View Details<h3>
+    </article>
+
+    <!-- Product 5 -->
+    <article class="product" data-name="NOB LN-8" data-images='{
+      "Black (MATT)": ["images/blackLN8.jpg", "images/blackLN8-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN8.jpg", "images/roseLN8-1.jpg"]
+    }'>
+      <img src="images/blackLN8.jpg" alt="NOB LN-8" />
+      <div class="overlay">READY STOCK</div>
+      <h2>NOB LN-8</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 6 -->
+    <article class="product" data-name="NOB LN-9" data-images='{
+      "Blasting Black": ["images/blackLN10.jpg", "images/blackLN10-1.jpg"],
+      "PVD Gold": ["images/goldLN10.jpg", "images/goldLN10-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN10.jpg", "images/roseLN10-1.jpg"]
+    }'>
+      <img src="images/blackLN10.jpg" alt="NOB LN-9" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-9</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 7 -->
+    <article class="product" data-name="NOB LN-12" data-images='{
+      "Blasting Black": ["images/blackLN12.jpg", "images/blackLN12-1.jpg"],
+      "PVD Gold": ["images/goldLN12.jpg", "images/goldLN12-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN12.jpg", "images/roseLN12-1.jpg"]
+    }'>
+      <img src="images/blackLN12.jpg" alt="NOB LN-12" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-12</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 8 -->
+    <article class="product" data-name="NOB LN-13" data-images='{
+      "China Black": ["images/blackLN13.jpg", "images/blackLN13-1.jpg"],
+      "PVD Gold": ["images/goldLN13.jpg", "images/goldLN13-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN13.jpg", "images/roseLN13-1.jpg"]
+    }'>
+      <img src="images/blackLN13.jpg" alt="NOB LN-13" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-13</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 9 -->
+    <article class="product" data-name="NOB LN-14" data-images='{
+      "China Black": ["images/blackLN14.jpg", "images/blackLN14-1.jpg"],
+      "PVD Gold": ["images/goldLN14.jpg", "images/goldLN14-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN14.jpg", "images/roseLN14-1.jpg"]
+    }'>
+      <img src="images/blackLN14.jpg" alt="NOB LN-14" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-14</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 10 -->
+    <article class="product" data-name="NOB LN-15" data-images='{
+      "Blasting Black": ["images/blackLN15.jpg", "images/blackLN15-1.jpg"],
+      "PVD Gold": ["images/goldLN15.jpg", "images/goldLN15-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN15.jpg", "images/roseLN15-1.jpg"]
+    }'>
+      <img src="images/blackLN15.jpg" alt="NOB LN-15" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-15</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 11 -->
+    <article class="product" data-name="NOB LN-17" data-images='{
+      "Blasting Black": ["images/blackLN17.jpg", "images/blackLN17-1.jpg"],
+      "PVD Gold": ["images/goldLN17.jpg", "images/goldLN17-1.jpg"],
+      "PVD Rose Gold": ["images/roseLN17.jpg", "images/roseLN17-1.jpg"]
+    }'>
+      <img src="images/blackLN17.jpg" alt="NOB LN-17" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-17</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+
+    <!-- Product 12 -->
+    <article class="product" data-name="NOB LN-10" data-images='{
+      "Blasting Black": ["images/black.jpg", "images/black-11.jpg"]
+    }'>
+      <img src="images/black.jpg" alt="NOB LN-10" />
+      <div class="overlay">New</div>
+      <h2>NOB LN-10</h2>
+      <h3>Click Here To View Details</h3>
+    </article>
+  </section>
+</main>
+
+<div id="productModal" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="modal-content">
+    <button class="close-btn" aria-label="Close modal">&times;</button>
+    <h2 id="modalTitle"></h2>
+
+    <div class="modal-image-wrapper">
+      <button id="prevImgBtn" aria-label="Previous image">&#10094;</button>
+      <img id="modalImage" src="" alt="" />
+      <button id="nextImgBtn" aria-label="Next image">&#10095;</button>
+    </div>
+
+    <label for="colorSelect">Select Color:</label>
+    <select id="colorSelect"></select>
+    <div class="sizes-info">
+      <strong>Change Color To View Different Photo</strong>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const modal = document.getElementById('productModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
+    const colorSelect = document.getElementById('colorSelect');
+    const closeBtn = modal.querySelector('.close-btn');
+    const prevImgBtn = document.getElementById('prevImgBtn');
+    const nextImgBtn = document.getElementById('nextImgBtn');
+
+    let currentImages = {};
+    let currentColor = '';
+    let currentIndex = 0;
+
+    function openModal(product) {
+      modalTitle.textContent = product.dataset.name;
+      currentImages = JSON.parse(product.dataset.images);
+
+      // Populate color dropdown
+      colorSelect.innerHTML = '';
+      Object.keys(currentImages).forEach(color => {
+        const option = document.createElement('option');
+        option.value = color;
+        option.textContent = color;
+        colorSelect.appendChild(option);
+      });
+
+      currentColor = Object.keys(currentImages)[0];
+      currentIndex = 0;
+      colorSelect.value = currentColor;
+
+      updateImage();
+      modal.style.display = 'flex';
+      modal.focus();
+    }
+
+    function updateImage() {
+      if (!currentImages[currentColor]) return;
+      const imagesArray = currentImages[currentColor];
+      if (!imagesArray || imagesArray.length === 0) return;
+
+      // Loop index
+      if (currentIndex < 0) currentIndex = imagesArray.length - 1;
+      if (currentIndex >= imagesArray.length) currentIndex = 0;
+
+      modalImage.src = imagesArray[currentIndex];
+      modalImage.alt = `${modalTitle.textContent} - ${currentColor} (${currentIndex + 1} of ${imagesArray.length})`;
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Event listeners on products
+    document.querySelectorAll('.product').forEach(product => {
+      product.addEventListener('click', () => openModal(product));
+      product.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(product);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    colorSelect.addEventListener('change', () => {
+      currentColor = colorSelect.value;
+      currentIndex = 0;
+      updateImage();
+    });
+
+    prevImgBtn.addEventListener('click', () => {
+      currentIndex--;
+      updateImage();
+    });
+
+    nextImgBtn.addEventListener('click', () => {
+      currentIndex++;
+      updateImage();
+    });
+
+    // Accessibility: Close modal on ESC
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

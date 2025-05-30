@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Long Life</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f9f7f4;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background-color: #f9f7f4;
+    }
+
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-section img {
+      height: 90px;
+      width:160px;
+    }
+
+    .tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: -5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-item {
+      position: relative;
+      font-size: 14px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-item:hover {
+      text-decoration: underline;
+    }
+
+    .nav-item.active {
+      font-weight: bold;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+      height: 90vh;
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      transition: background-image 1s ease-in-out;
+      color: #000;
+      background-color: #ccc;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .hero h4 {
+      font-weight: 400;
+      letter-spacing: 3px;
+      font-size: 16px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      line-height: 1.2;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero button {
+      padding: 12px 30px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      border: none;
+      background-color: white;
+      color: black;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .handles-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 320px);
+      gap: 20px;
+      padding: 20px 50px;
+      max-width: 900px;
+      margin: 0 auto 50px;
+    }
+
+    .handle {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    .handle img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 600;
+      color: #000;
+      background: rgba(255,255,255,0.85);
+      padding: 12px 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      font-size: 16px;
+      border-radius: 4px;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .handle:hover img {
+      transform: scale(1.1);
+    }
+
+    .handle:hover .overlay-text {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    footer {
+      background: #f9f7f4;
+      padding: 50px;
+      color: #999;
+      font-size: 14px;
+      border-top: 1px solid #ddd;
+    }
+
+    footer h4 {
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    footer a {
+      color: #999;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #333;
+    }
+
+    .footer-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .footer-block {
+      flex: 1 1 300px;
+      min-width: 250px;
+    }
+
+    .footer-categories {
+      margin-top: 50px;
+    }
+
+    @media (max-width: 900px) {
+      .handles-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+
+      .handle img {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      .logo-section {
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .nav-item {
+        font-size: 16px;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 20px;
+        height: auto;
+        background-position: center;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .hero button {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      .footer-section {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .footer-block {
+        margin-bottom: 30px;
+      }
+
+      .footer-categories {
+        padding: 0 20px;
+        font-size: 13px;
+      }
+
+      footer {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo-section">
+      <img src="images/logo.png" alt="Long Life Logo" /><br>
+      <div class="tagline">BY JAY AMBE</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">HOME</a>
+      <a href="handles.html" class="nav-item">HANDLES</a>
+      <a href="door-knobs.html" class="nav-item">DOOR KNOBS</a>
+      <a href="bathroom-accessories.html" class="nav-item">BATHROOM ACCESSORIES</a>
+      <a href="contact.html" class="nav-item">CONTACT</a>
+    </div>
+  </div>
+
+  <div class="hero" id="hero">
+    <div class="hero-content">
+      <h4>Distinctive Charisma</h4>
+      <h1>Embrace Luxury<br>and elegance</h1>
+      <p>Timeless Glamour, Unmatched Sophistication</p>
+      <button>View More</button>
+    </div>
+  </div>
+
+<div class="handles-container">
+  <a href="1.html" class="handle">
+    <img src="images/cabinet.jpg" alt="Mortise Handles" />
+    <div class="overlay-text">Cabinet Handles →</div>
+  </a>
+  
+  <a href="2.html" class="handle">
+    <img src="images/profile1.png" alt="Ornate Handles" />
+    <div class="overlay-text">Profile Handles →</div>
+  </a>
+  
+  <a href="door-knobs.html" class="handle">
+    <img src="images/knob.jpg" alt="Door Knobs" />
+    <div class="overlay-text">Door Knobs →</div>
+  </a>
+  
+  <a href="bathroom-accessories.html" class="handle">
+    <img src="images/bathroom.jpg" alt="Bathroom accessories" />
+    <div class="overlay-text">Bathroom Accessories →</div>
+  </a>
+</div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hero = document.getElementById("hero");
+      const backgrounds = [
+        'url("images/bg7.jpg")',
+        'url("images/bg8.jpg")',
+        'url("images/bg1.jpg")',
+        'url("images/bg2.jpg")'
+      ];
+      let index = 0;
+      hero.style.backgroundImage = backgrounds[index];
+      setInterval(() => {
+        index = (index + 1) % backgrounds.length;
+        hero.style.backgroundImage = backgrounds[index];
+      }, 5000);
+
+      const path = window.location.pathname.split("/").pop();
+      document.querySelectorAll(".nav-item").forEach(link => {
+        if (link.getAttribute("href") === path || (path === "" && link.getAttribute("href") === "index.html")) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+  <footer>
+    <div class="footer-section">
+      <div class="footer-block">
+        <h4>SHOWROOM</h4>
+        <p>+91 9825656481</p>
+        <p>+91 9737145421</p>
+        <p>
+          1st floor, Nr. Sarvottam Furniture<br>
+          Nr. Panchil Co. Op. Bank,<br>
+          Sosyo Circle<br>
+          U.M Road, Surat
+        </p>
+      </div>
+      <div class="footer-block">
+        <h4>INFORMATION</h4>
+        <p><a href="index.html">About Us</a></p>
+        <p><a href="#">Privacy Policy</a></p>
+        <p><a href="#">Terms & Conditions</a></p>
+        <p><a href="#">FAQ</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+    </div>
+
+    <div class="footer-categories">
+      <h4>CATEGORY</h4>
+      <p><strong>Cabinet Handles</strong><br> </p>
+      <p><strong>Profile Handles</strong><br> </p>
+      <p><strong>Door Kobs</strong><br> </p>
+      <p><strong>Bathroom Accessories</strong><br> </p>
+
+      <br><br>
+      <p style="font-size: medium; text-align: center;"><strong>PLEASE CONTACT US IF YOU HAVE ANY QUERY </strong></p>
+    </div>
+  </footer>
+</body>
+</html>

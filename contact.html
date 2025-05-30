@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Long Life</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f9f7f4;
+      color: #333;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 50px;
+      background-color: #f9f7f4;
+    }
+
+    .logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo-section img {
+      height: 90px;
+      width:160px;
+    }
+
+    .tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: -5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-item {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .nav-item:hover {
+      text-decoration: underline;
+    }
+
+    .nav-item.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .contact-header {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
+
+    .contact-header h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .contact-header p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .contact-info-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      padding: 30px;
+      background: rgb(245, 245, 245); /* Light background color */
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info {
+      text-align: center;
+      padding: 20px;
+      background: rgb(238, 238, 238); /* Slightly darker background for the section */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-info h3 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: #333;
+    }
+
+    .contact-info p {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .contact-info strong {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .map {
+      margin: 50px auto 0;
+      max-width: 1000px;
+      height: 350px;
+      border: 0;
+      width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .contact-header {
+        padding: 20px 20px 40px;
+      }
+
+      .contact-info-wrapper {
+        padding: 20px;
+      }
+
+      .contact-info {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo-section">
+      <img src="images/logo.png" alt="Long Life Logo" /><br>
+      <div class="tagline">BY JAY AMBE</div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">HOME</a>
+      <a href="handles.html" class="nav-item">HANDLES</a>
+      <a href="door-knobs.html" class="nav-item">DOOR KNOBS</a>
+      <a href="bathroom-accessories.html" class="nav-item">BATHROOM ACCESSORIES</a>
+      <a href="contact.html" class="nav-item active">CONTACT</a>
+    </div>
+  </div>
+
+  <div class="contact-header">
+    <h1>Get in Touch</h1>
+    <p>Have a question or need help? We'd love to hear from you.</p>
+  </div>
+
+  <div class="contact-info-wrapper">
+    <div class="contact-info">
+      <h3>Showroom Address</h3>
+      <p> JAY AMBE,</p>
+      <p>1st floor, Nr. Sarvottam Furniture</p>
+      <p>Nr. Panchil Co. Op. Bank</p>
+      <p>Sosyo Circle, U.M Road, Surat</p>
+
+      <strong>Phone</strong>
+      <p>+91 9825656481</p>
+      <p>+91 9737145421</p>
+
+      <strong>Email</strong>
+      <p>info@longlifehandles.com</p>
+    </div>
+  </div>
+
+  <!-- You can replace the iframe src with your actual Google Maps location -->
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d465.06466237092604!2d72.82586636286597!3d21.1715997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e15c3cdb477%3A0xaa7a0caaa3b03e2f!2sNEW%20SARVOTTAM%20FURNITURE!5e0!3m2!1sen!2sin!4v1747378297965!5m2!1sen!2sin&z=15"
+    width="100%" height="500" 
+    style="border:0;" allowfullscreen=""
+    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+
+  <script>
+    const links = document.querySelectorAll('.nav-item');
+    const currentPage = location.pathname.split("/").pop();
+    links.forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+
+</body>
+</html>
